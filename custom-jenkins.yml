@@ -1,0 +1,23 @@
+## Comment out Circle CI script
+name: "Vehicle  Simulator CI by Zia <github.com/ziaagikian>"
+author:  Zia Ur Rahman <github.com/ziaagikian>
+
+# Custome Job pipelines
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+    steps:
+    - uses: actions/checkout@v1 ##Latest Checkout
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Run  Unit Test
+      run: ./gradlew test
+    - name: Build with Java
+      run: ./gradlew build
+    - name: Building Docker Image
+      run: ./gradlew dockerBuildImage
+    - name: Starting Container
+      run: ./gradlew startContainer
+      

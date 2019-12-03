@@ -1,0 +1,16 @@
+{  
+   "id":"vehicle-simulator",
+    "cpus":1,
+    "mem":4096,
+    "ports":[  
+        0 
+      ],
+    "instances":1,
+    "container":{  
+       "type":"DOCKER",
+       "docker":{  
+          "image":"ziaagikian/vehicle-simulator",
+          "network":"BRIDGE"
+       }
+    }
+}

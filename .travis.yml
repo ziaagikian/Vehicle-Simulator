@@ -1,0 +1,42 @@
+name: "Vehicle  Simulator CI by Zia <github.com/ziaagikian>"
+author: 'Zia Ur Rahman <githu.com/ziaagikian>'
+ #Default  Xenial has JDK issues
+dist: trusty 
+language: java
+jdk:
+  - openjdk8
+
+before_cache:
+  - rm -f  ./gradle/caches/modules-2/modules-2.lock
+  - rm -rf ./gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - ./gradle/caches
+    - ./gradle/wrapper
+
+#Build only master
+branches:
+  only:
+    - master
+
+script:
+# Run unit test
+  - ./gradlew test
+# Build for Java
+  - ./gradlew build
+  # Build Docker Image
+  - ./gradlew dockerBuildImage
+
+after_success:
+  echo "Build Succesfull"
+
+after_failure:
+  echo "Build Unsuccesfull"
+
+#Send success Failure notifications for master branch only
+notifications:
+  email: 
+    recipients:
+      - test@xyz.com
+    on_success: always
+    on_failure: always

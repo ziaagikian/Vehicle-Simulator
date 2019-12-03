@@ -1,0 +1,9 @@
+.classpth
+.DS_Store
+.project
+bin/
+build/
+.git/
+.gradle/
+.gradle
+.settings/

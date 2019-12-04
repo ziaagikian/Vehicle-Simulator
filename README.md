@@ -1,3 +1,5 @@
+   [![Build Status](https://travis-ci.org/ziaagikian/Vehicle-Simulator.svg?branch=master)](https://travis-ci.org/ziaagikian/Vehicle-Simulator)
+
 # Vehicle Simulator
 
 This `Java` based desktop commandline app to simulate real time vehicle(s) connected with `IoT cloud`. The app can run  in parallel with [this  repo](https://github.com/ziaagikian/ConnectedVehicles) . 

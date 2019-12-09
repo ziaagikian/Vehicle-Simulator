@@ -47,22 +47,22 @@ jobs:
 
       # Github  Release  Managment Settings
       before_deploy:
-        # - export TRAVIS_TAG=$GIT_TAG
+        - export TRAVIS_TAG=$GIT_TAG
         # - echo "$TRAVIS_TAG" "$TRAVIS_COMMIT"
         - git config --local user.name "$GITHUB_USER_NAME"
         - git config --local user.email "$GITHUB_USER_EMAIL"
-        # - git tag "$TRAVIS_TAG" "$TRAVIS_COMMIT"
+        - git tag "$TRAVIS_TAG" "$TRAVIS_COMMIT"
 
       deploy:
         provider: releases
         api_key: $GITHUB_API_KEY
         file: $TRAVIS_BUILD_DIR/build/libs/VehicleSimulator-1.0.0.jar
         skip_cleanup: true
-        name: release-build-$TRAVIS_COMMIT
-        body: Automatic build of $TRAVIS_BRANCH ($TRAVIS_COMMIT) built by Travis CI on $(date +'%F %T %Z').
-        prerelease: true
+        name: release-build-$TRAVIS_TAG
+        body: "Automatic build of $TRAVIS_BRANCH ($TRAVIS_COMMIT) built by Travis CI on $(date +'%F %T %Z')."
+        # prerelease: true
         overwrite: true
-        target_commitish: $TRAVIS_COMMIT
+        # target_commitish: $TRAVIS_COMMIT
         on:
           # tags: true
           repo: ziaagikian/Vehicle-Simulator

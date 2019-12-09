@@ -19,13 +19,45 @@ branches:
   only:
     - master
 
-script:
-# Run unit test
-  - ./gradlew test
-# Build for Java
-  - ./gradlew build
-  # Build Docker Image
-  - ./gradlew dockerBuildImage
+stages:
+  - test
+  - build
+  - release
+
+jobs:
+  include:
+    - stage : test
+      name : "Vehicle Simulator Unit Test Automation"
+      script:
+      # Run unit test
+        - ./gradlew test
+    
+    - stage: build
+      name: "Gradle and Docker build artifacts"
+      script:
+        # Build for Java
+        - ./gradlew build
+        # Build Docker Image
+        - ./gradlew dockerBuildImage
+      
+    - stage: release
+      name: "Github Release"
+      script: echo "Deploying to GitHub releases ..."
+      deploy:
+        provider: releases
+        api_key: $GITHUB_API_KEY
+        file: $TRAVIS_BUILD_DIR/build/libs/VehicleSimulator-1.0.0.jar
+        skip_cleanup: true
+        name: release-build-$TRAVIS_TAG
+        body: Automatic build of $TRAVIS_BRANCH ($TRAVIS_COMMIT) built by Travis CI on $(date +'%F %T %Z').
+        prerelease: true
+        overwrite: true
+        target_commitish: $TRAVIS_COMMIT
+        on:
+          tags: true
+
+      after_deploy:
+        - rm -rf $TRAVIS_BUILD_DIR/build/
 
 after_success:
   echo "Build Succesfull"
@@ -37,6 +69,6 @@ after_failure:
 notifications:
   email: 
     recipients:
-      - test@xyz.com
+      - secure: $HASHTAG
     on_success: always
     on_failure: always

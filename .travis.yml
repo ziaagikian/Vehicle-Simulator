@@ -43,6 +43,12 @@ jobs:
     - stage: release
       name: "Github Release"
       script: echo "Deploying to GitHub releases ..."
+
+      # Github  Release  Managment Settings
+      before_deploy:
+        - git config --local user.name "$GITHUB_USER_NAME"
+        - git config --local user.email "$GITHUB_USER_EMAIL"
+        - git tag "$TRAVIS_TAG" "$TRAVIS_COMMIT"
       deploy:
         provider: releases
         api_key: $GITHUB_API_KEY
@@ -55,6 +61,8 @@ jobs:
         target_commitish: $TRAVIS_COMMIT
         on:
           tags: true
+          branch: master
+          repo: ziaagikian/Vehicle-Simulator
 
       after_deploy:
         - rm -rf $TRAVIS_BUILD_DIR/build/
@@ -69,6 +77,6 @@ after_failure:
 notifications:
   email: 
     recipients:
-      - secure: $HASHTAG
-    on_success: always
+      - $GITHUB_USER_EMAIL
+    on_success: never
     on_failure: always

@@ -14,10 +14,11 @@ cache:
     - ./gradle/caches
     - ./gradle/wrapper
 
-#Build only master
+#Build only master and git Tags [v1.0]
 branches:
   only:
     - master
+    - /v\d+\.\d+[a-z]/
 
 stages:
   - unit-test
@@ -46,10 +47,12 @@ jobs:
 
       # Github  Release  Managment Settings
       before_deploy:
+        - export TRAVIS_TAG=$GIT_TAG
+        - echo "$TRAVIS_TAG" "$TRAVIS_COMMIT"
         - git config --local user.name "$GITHUB_USER_NAME"
         - git config --local user.email "$GITHUB_USER_EMAIL"
         - git tag "$TRAVIS_TAG" "$TRAVIS_COMMIT"
-        
+
       deploy:
         provider: releases
         api_key: $GITHUB_API_KEY
@@ -62,8 +65,8 @@ jobs:
         target_commitish: $TRAVIS_COMMIT
         on:
           tags: true
-          branch: master
           repo: ziaagikian/Vehicle-Simulator
+          all_branches: true
 
       after_deploy:
         - rm -rf $TRAVIS_BUILD_DIR/build/

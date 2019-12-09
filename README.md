@@ -43,7 +43,7 @@ The project can be build using gradle utility and via this script `sh  gradle-bu
 
 ## Release Managment
 
-By default 3 stages are defined and automatated with `Travis CI`. These steps are `unit-test`, `build` and `release`. In the final step the compiled binary i-e `VehicleSimulator-1.0.0.jar` is deployed to github release and can be found at  this [link]()
+By default 3 stages are defined and automatated with `Travis CI`. These steps are `unit-test`, `build` and `release`. In the final step the compiled binary i-e `VehicleSimulator-1.0.0.jar` is deployed to github release and can be found at  this [link](https://github.com/ziaagikian/Vehicle-Simulator/releases)
 
 ## Code  Execution
 Output jar file can be executed from command line (with/without CMD Args). Sample commandline scripts for Mac/*nix operating systems are.

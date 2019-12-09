@@ -18,7 +18,7 @@ cache:
 branches:
   only:
     - master
-    - /v\d+\.\d+[a-z]/
+    - /v\d+\.\d+/
 
 stages:
   - unit-test

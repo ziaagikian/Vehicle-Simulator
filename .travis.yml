@@ -51,7 +51,7 @@ jobs:
         # - echo "$TRAVIS_TAG" "$TRAVIS_COMMIT"
         - git config --local user.name "$GITHUB_USER_NAME"
         - git config --local user.email "$GITHUB_USER_EMAIL"
-        - git tag "$TRAVIS_TAG" "$TRAVIS_COMMIT"
+        # - git tag "$TRAVIS_TAG" "$TRAVIS_COMMIT"
 
       deploy:
         provider: releases

@@ -37,9 +37,15 @@ public class Helpers {
 			String intervalType = sel.substring(sel.length() - 1, sel.length());
 			int input = Integer.parseInt(intString);
 			interval = applyFormualae(input, intervalType);
+		}else {
+			showErrorMessage();
 		}
-
 		return interval;
+	}
+
+	private static void showErrorMessage() {
+		System.err.println("0 or Wrong input format is given the simulation and it will run for default " +
+				(Constants.DEFAULT_SIMULATION_DURATION/60) + " minutes");
 	}
 
 	/**
@@ -77,7 +83,7 @@ public class Helpers {
 			}
 
 		} else {
-			System.out.println("0 or Wrong input format is given the simulation and it will run for default time");
+			showErrorMessage();
 		}
 		return calculatedVal;
 	}

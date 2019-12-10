@@ -35,6 +35,9 @@ jobs:
     
     - stage: build
       name: "Gradle and Docker build artifacts"
+      # Remove  existing build from artifacts
+      before_script:
+        - ./gradlew clean
       script:
         # Build for Java
         - ./gradlew build

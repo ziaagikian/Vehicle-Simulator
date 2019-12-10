@@ -19,6 +19,7 @@ buildscript {
 
 // Apply the java-library plugin to add support for Java Library
 apply  plugin: 'java'
+
 apply plugin: 'java-library'
 //For Docker
 apply plugin: 'application'
@@ -53,11 +54,10 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
-    
+    // For Http Connection
     compile 'org.apache.httpcomponents:httpclient:4.5.10'
-    
     //Google Gson Library for JSON handling
-    implementation 'com.google.code.gson:gson:2.8.6'       
+    compile 'com.google.code.gson:gson:2.8.6'       
 }
 
 // ---- Docker  Action
@@ -81,4 +81,22 @@ task startContainer(type: DockerStartContainer) {
     dependsOn createContainer
     targetContainerId { createContainer.getContainerId() }
 }
+
+// Run Jar File  Support
+jar{
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+        configurations.runtime.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    manifest{
+        attributes 'Main-Class': mainClassName
+        }
+
+}
+
+
 

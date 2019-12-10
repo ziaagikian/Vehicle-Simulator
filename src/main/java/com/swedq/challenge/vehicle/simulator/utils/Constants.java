@@ -11,7 +11,7 @@ public class Constants {
 	public static final  String INPUT_REGEX = "\\d+[H M S]$"; 
 //	public static final  String INPUT_REGEX ="^[1-9][ H M S ]$"; 
 	// API Path
-	public  static  final String API_PATH = "http://localhost:8080";
+	public  static  final String API_PATH = "http://127.0.0.1:8080";
 	public static final int HTTP_OK = 200;
 	public static final int  MAX_SERVER_RETRIES = 5; //MAXIMUM tries for Config APIs
 	

@@ -35,14 +35,16 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 
 		// Check first argument and ignore others.
+		sSimulationDuration = Constants.DEFAULT_SIMULATION_DURATION;
 		if (args.length > 0) {
 			int inputSimlDuration = Helpers.parseSimulationCmdArg(args[0]);
-			sSimulationDuration = inputSimlDuration > 0 ? inputSimlDuration : Constants.DEFAULT_SIMULATION_DURATION;
+			sSimulationDuration = inputSimlDuration > 0 ? inputSimlDuration : sSimulationDuration;
 		} else {
 			System.out.println(
 					"Input time is not given the simulation will run for  default " + (Constants.DEFAULT_SIMULATION_DURATION/60) + " minutes");
+			
 		}
-
+		
 		sApiUtils = new ApiUtils();
 
 		ConfigResponse vehicleConfigs = getVehicleConfigs();
